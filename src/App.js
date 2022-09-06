@@ -10,6 +10,8 @@ import {
 } from "react-three-fiber";
 import circleImg from "./assets/circle.png";
 import { Suspense, useCallback, useMemo, useRef } from "react";
+import Logo from "./logo.svg";
+
 extend({ OrbitControls });
 
 function CameraControls() {
@@ -38,7 +40,7 @@ function Points() {
 
    let t = 0;
    let f = 0.0015;
-   let a = 15;
+   let a = 9;
    const graph = useCallback(
       (x, z) => {
          return Math.sin(f * (x ** 2 + z ** 2 + t)) * a;
@@ -46,8 +48,8 @@ function Points() {
       [t, f, a]
    );
 
-   const count = 100;
-   const sep = 3;
+   const count = 200;
+   const sep = 2.5;
    let positions = useMemo(() => {
       let positions = [];
 
@@ -112,7 +114,7 @@ function AnimationCanvas() {
    return (
       <Canvas
          colorManagement={false}
-         camera={{ position: [80, 50, 30], fov: 75 }}
+         camera={{ position: [0, 40, 0], fov: 75 }}
       >
          <Suspense fallback={null}>
             <Points />
@@ -126,8 +128,19 @@ function App() {
    return (
       <div className="anim">
          <div className="yeah">
-            <span>ADMIRE CREATIONS</span>
-            .com
+            <span>Admire Creations</span>
+            <div
+               style={{
+                  fontSize: "1rem",
+                  fontWeight: "medium",
+                  display: "block",
+               }}
+            >
+               {"{ Coming Soon... }"}
+            </div>
+         </div>
+         <div className="footer">
+            <img src={Logo} alt="logo" />
          </div>
          <div className="blur" />
          <Suspense fallback={<div>Loading...</div>}>
